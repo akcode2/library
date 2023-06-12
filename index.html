@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>hello header</header>
+    <main class="container">
+        <section class="library" id="library">
+        </section>
+        <div class="grid">
+            <div>
+                <form>
+                    <header>
+                        <hgroup>  
+                            <h1>Add a book to your collection</h1>
+                            <h2>Seriously, add one</h2>
+                        </hgroup>
+                    </header>
+                    <div class="grid">
+                        <label for="title">
+                            Title
+                            <input type="text" id="title" name="title" placeholder="Title" required>
+                        </label>
+                        <label for="author">
+                            Author
+                            <input type="text" id="author" name="author" placeholder="Author" required>
+                        </label>
+                        <label for="author">
+                            Pages
+                            <input type="text" id="pages" name="pages" placeholder="Pages" required>
+                        </label>
+                        <label for="read">
+                            Have you read it?
+                            <input type="checkbox" id="read_status" name="read_status" role="switch" required>
+                        </label>
+
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>hello, footer</footer>
+    <script src="./script.js"></script>
+</body>
+</html>

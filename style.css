@@ -1,0 +1,38 @@
+body {
+    padding: 0;
+}
+article {
+    display: flex;
+    border: 1px solid black;
+    flex-direction: column-reverse;
+    flex: 1 1 0;
+    padding: 1.5rem;
+    border: solid 15px black;
+    background-color: #FAF9F6;
+    margin: 15px;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(150px, auto);
+    gap: 15px;
+
+    /* CSS background pattern. Source: Temani Afif */
+    --s: 60px; /* control the size */
+    
+    --_g: #0000 83%,#b09f79 85% 99%,#0000 101%;
+    background:
+      radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
+      radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
+      radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
+      radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
+      #476074;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+}
+
+/* img::after {
+    box-shadow: inset 20px 3px 10px 0 #000000;
+} */
