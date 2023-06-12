@@ -18,7 +18,7 @@ Book.prototype.info = function () {
     }
 }
 
-
+// Create new Book object
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
 }
@@ -38,8 +38,7 @@ form.addEventListener('submit', event => {
     addBookToLibrary(title, author, pages, read);
 
     // Display the new book
-    const len = myLibrary.length;
-    printLibrary(len - 1);
+    updateLibrary();
 })
 
 function removeBookFromLibrary(index) {
@@ -47,87 +46,82 @@ function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
 }
 
-// Display books beginning at index
-function printLibrary(index) {
-    const library = document.getElementById('library');
-
-    for (let i = index, r = myLibrary.length; i < r; i++) {
-        const book = document.createElement('article');
-        book.innerText = myLibrary[i].info();
-        library.appendChild(book);
-
-        const bookCover = document.createElement('img');
-        const author = myLibrary[i].author;
-        const title = myLibrary[i].title;
-
-        fetchCover(title, author);
-
+function changeReadState(index) {
+    const state = myLibrary[index].read;
+    if (state === true) {
+        myLibrary[index].read = false;
+        console.log(`${myLibrary[index].read}`);
     }
+    else {
+        myLibrary[index].read = true;
+        console.log(`${myLibrary[index].read}`);
+    }
+
+    return myLibrary[index].read;
 }
 
-// Function to fetch covers from the Open Library API, written by ChatGPT
-async function fetchCover(title, author) {
-    const searchUrl = `https://openlibrary.org/search.json?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}`;
-  
-    try {
-      const response = await fetch(searchUrl);
-      const data = await response.json();
-      
-      // Extract the first result
-      const book = data.docs[0];
-      if (!book) {
-        console.log('No book found.');
-        return;
-      }
-      
-      const isbn = book.isbn && book.isbn[0];
-      if (!isbn) {
-        console.log('No ISBN found for the book.');
-        return;
-      }
-      
-      // Fetch the book cover
-      const coverURL = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
-      console.log('Book Cover URL:', coverURL);
-      const bookArticle = document.querySelectorAll('section > article:last-child')[0];
-      const imgElement = document.createElement('img');
-      imgElement.src = coverURL;
-      bookArticle.appendChild(imgElement);
 
-      return coverURL;
+function updateLibrary() {
+    const library = document.getElementById('library');
+    const latestBook = myLibrary.length - 1;
 
-    } catch (error) {
-        console.log('Error:', error);
-      }
+    const card = document.createElement('article');
+    card.classList.add('card');
+    const cardTitle = document.createElement('p');
+    cardTitle.innerText = myLibrary[latestBook].info();
+
+    const cardBtns = document.createElement('div');
+    cardBtns.classList.add('cardBtns');
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('removeBtn');
+    const removeSVG = document.createElement('img');
+    removeSVG.src = "./images/remove.svg";
+    removeBtn.appendChild(removeSVG);
+
+    removeBtn.addEventListener('click', () => {
+        removeBookFromLibrary(card.id);
+        card.remove();
+    })
+
+    const readBtn = document.createElement('button');
+    readBtn.classList.add('readBtn');
+    const readSVG = document.createElement('img');
+    const readState = myLibrary[latestBook].read;
+    if (readState === true) {
+        readSVG.src = "images/book-check.svg";
+    }
+    else if (readState === false) {
+        readSVG.src = "images/books-shelved.svg";
+    }
+    readBtn.appendChild(readSVG);
+
+    readBtn.addEventListener('click', () => {
+        let state;
+        state = changeReadState(card.id);
+        if (state === true) {
+            readSVG.src = "images/book-check.svg";
+        }
+        else if (state === false) {
+            readSVG.src = "images/books-shelved.svg";
+        }
+    })
+
+    cardBtns.appendChild(readBtn);
+    cardBtns.appendChild(removeBtn);
+
+    card.appendChild(cardBtns);
+    card.appendChild(cardTitle);
+    card.id = latestBook;
+    library.appendChild(card);
+
 }
-
-// // Function to create an img element and set the src attribute
-// function createBookCoverElement(coverUrl) {
-//     const library = document.getElementById('library');
-
-//     const imgElement = document.createElement('img');
-//     imgElement.src = coverUrl;
-    
-//     library.appendChild(imgElement);
-//   }
-
-// // Function that calls fetchCover and creates the img element with the coverUrl
-// async function handleBookSearch(title, author) {
-//     const coverUrl = await fetchCover(title, author);
-//     if (coverUrl) {
-//       console.log('Book Cover URL:', coverUrl);
-//       createBookCoverElement(coverUrl);
-//     } else {
-//       console.log('Cover URL not found.');
-//     }
-//   }
-
 
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 
 myLibrary.push(book1);
 
-printLibrary(0);
+updateLibrary();
 
 
 
