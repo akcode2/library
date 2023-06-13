@@ -1,2 +1,2 @@
 # library
-Used Javascript objects and object constructors to make a book collection
+An app demonstrating Javascript objects/object constructors by collecting books into a library.
