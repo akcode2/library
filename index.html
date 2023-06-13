@@ -8,23 +8,28 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Shrikhand&display=swap" rel="stylesheet">
+    </head>
 <body>
-    <header>hello header</header>
+    <header></header>
     <main class="container">
         <section class="library" id="library">
         </section>
-        <div class="grid">
+        <button class="add" id="add"><img src="images/add.svg"></button>
+
+
+        <!-- Add book modal -->
+        <div id="modal" class="modal slide-in-blurred-br">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
             <div>
                 <form>
-                    <header>
-                        <hgroup>  
+                    <header> 
                             <h1>Add a book to your collection</h1>
-                            <h2>Seriously, add one</h2>
-                        </hgroup>
                     </header>
-                    <div class="grid">
+                    <div class="form">
                         <label for="title">
                             Title
                             <input type="text" id="title" name="title" placeholder="Title" required>
@@ -41,14 +46,16 @@
                             Have you read it?
                             <input type="checkbox" id="read_status" name="read_status" role="switch" required>
                         </label>
-
+                        <button type="submit">Submit</button>
                     </div>
-                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
+  
+  </div>
+
     </main>
-    <footer>hello, footer</footer>
+    <footer></footer>
     <script src="./script.js"></script>
 </body>
 </html>
